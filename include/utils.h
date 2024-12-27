@@ -2,6 +2,7 @@
 #define __UTILS_H__
 
 #include <map>
+#include <optional>
 #include <string>
 #include <array>
 #include <utility>
@@ -19,5 +20,7 @@ std::string ip_to_string(uint32_t);
 
 std::array<uint8_t, 6> get_device_mac(std::string);
 uint32_t get_device_ip(std::string);
+
+std::optional<std::pair<std::vector<std::string>, std::map<std::string, std::string>>> arg_parser(std::vector<std::string>);
 
 #endif // __UTILS_H__

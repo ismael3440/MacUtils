@@ -1,3 +1,5 @@
+#include <cstddef>
+#include <optional>
 #include <string>
 #include <array>
 #include <sstream>
@@ -140,4 +142,25 @@ uint32_t get_device_ip(std::string device) {
     close(sock);
     auto ip = addr.sin_addr;
     return ip.s_addr;
+}
+
+std::optional<std::pair<std::vector<std::string>, std::map<std::string, std::string>>> arg_parser(std::vector<std::string> args) {
+    if (args.empty())
+        return std::nullopt;
+    std::pair<std::vector<std::string>, std::map<std::string, std::string>> parse;
+    auto& data = parse.first;
+    auto& params = parse.second;
+
+    for (const auto& arg : args) {
+        if (arg.empty())
+            return std::nullopt;
+        if (arg[0] == '-') {
+            auto deĺimiter_pos = arg.find('=');
+            if (deĺimiter_pos == std::string::npos)
+                return std::nullopt;
+            auto key = arg.substr(0, deĺimiter_pos);
+            auto value = arg.substr(deĺimiter_pos + 1);
+        }
+    }
+    return parse;
 }
