@@ -14,4 +14,3 @@ CTestTestfile.cmake
 _deps
 CMakeUserPresets.json
 setup.sh
-setup_debug.sh
