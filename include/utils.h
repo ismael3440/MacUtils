@@ -1,8 +1,11 @@
 #ifndef __UTILS_H__
 #define __UTILS_H__
 
+#include <map>
 #include <string>
 #include <array>
+#include <utility>
+#include <vector>
 
 bool isMAC(std::string);
 bool isIP(std::string);
