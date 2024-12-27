@@ -1,7 +1,7 @@
 
 # MacUtils
 
-Este comando fue escrito para distribuciones de Linux, diseñado para trabajar con direcciones MAC en redes local.
+Este comando fue diseñado para distribuciones de Linux y para trabajar con direcciones MAC en redes locales.
 
 # Instalación 
 Clonar el repositorio:
@@ -19,6 +19,7 @@ ninja -j$(nproc) -C build
 
 Compilarlo en Termux
 ```bash
+pkg install ninja
 mkdir build/
 cmake -G Ninja -B build -S . -DCMAKE_INSTALL_PREFIX=$PREFIX
 ninja -j$(nproc) -C build
@@ -41,7 +42,7 @@ Descripción: Este comando fue desarrollado con el  propósito de poder trabajar
 /restore <nueva_mac> <interfaz>  -> cambia la dirección MAC de <interfaz> por <nueva_mac>
 /search <ip_objetivo> <interfaz> -> busca en la red local <interfaz> la dirección MAC de <ip_objetivo>
 ```
-Emplos:
+Ejemplos:
 ```bash
 sudo macutils /restore 1F:2E:3D:4C:5B:6A eth0
 ```
