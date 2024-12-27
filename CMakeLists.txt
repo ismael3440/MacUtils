@@ -7,12 +7,6 @@ project(${PROJECT_NAME})
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-option(ENABLE_DEBUG "Enable debug mode" OFF)
-
-if(ENABLE_DEBUG)
-    add_definitions(-DDEBUG)
-endif()
-
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_INSTALL_PREFIX}/bin)
 
 include_directories(include/)
