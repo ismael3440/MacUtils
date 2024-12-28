@@ -19,3 +19,14 @@ add_executable(${PROJECT_NAME}
     src/restore.cpp
     src/search.cpp
 )
+
+set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+set(TEST_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/tests_output)
+
+add_executable(${PROJECT_NAME}_tests
+    tests/tests.cpp
+    src/utils.cpp
+)
+
+enable_testing()
+add_test(NAME RunTests COMMAND ${PROJECT_NAME}_tests)

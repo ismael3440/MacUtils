@@ -147,9 +147,8 @@ uint32_t get_device_ip(std::string device) {
 std::optional<std::pair<std::vector<std::string>, std::map<std::string, std::string>>> arg_parser(std::vector<std::string> args) {
     if (args.empty())
         return std::nullopt;
-    std::pair<std::vector<std::string>, std::map<std::string, std::string>> parse;
-    auto& data = parse.first;
-    auto& params = parse.second;
+    std::vector<std::string> data;
+    std::map<std::string, std::string> params;
 
     for (const auto& arg : args) {
         if (arg.empty())
@@ -158,9 +157,12 @@ std::optional<std::pair<std::vector<std::string>, std::map<std::string, std::str
             auto deĺimiter_pos = arg.find('=');
             if (deĺimiter_pos == std::string::npos)
                 return std::nullopt;
-            auto key = arg.substr(0, deĺimiter_pos);
+            auto key = arg.substr(1, deĺimiter_pos - 1);
             auto value = arg.substr(deĺimiter_pos + 1);
+            params[key] = value;
+        } else {
+            data.push_back(arg);
         }
     }
-    return parse;
+    return std::make_pair(data, params);
 }
