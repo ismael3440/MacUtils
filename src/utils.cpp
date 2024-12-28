@@ -155,8 +155,10 @@ std::optional<std::pair<std::vector<std::string>, std::map<std::string, std::str
             return std::nullopt;
         if (arg[0] == '-') {
             auto deĺimiter_pos = arg.find('=');
-            if (deĺimiter_pos == std::string::npos)
-                return std::nullopt;
+            if (deĺimiter_pos == std::string::npos) {
+                data.push_back(arg);
+                continue;
+            }
             auto key = arg.substr(1, deĺimiter_pos - 1);
             auto value = arg.substr(deĺimiter_pos + 1);
             params[key] = value;
