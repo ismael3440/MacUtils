@@ -1,3 +1,6 @@
+#include <cstddef>
+#include <optional>
+#include <random>
 #include <string>
 #include <array>
 #include <sstream>
@@ -31,7 +34,6 @@ std::string mac_to_string(std::array<uint8_t, 6> mac) {
     for (size_t i = 0; i < mac.size(); i++) {
         if (i > 0)
             oss << ':';
-
         oss << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(mac[i]);
     }
     return oss.str();
@@ -140,4 +142,42 @@ uint32_t get_device_ip(std::string device) {
     close(sock);
     auto ip = addr.sin_addr;
     return ip.s_addr;
+}
+
+std::optional<std::pair<std::vector<std::string>, std::map<std::string, std::string>>> arg_parser(std::vector<std::string> args) {
+    if (args.empty())
+        return std::nullopt;
+    std::vector<std::string> data;
+    std::map<std::string, std::string> params;
+
+    for (const auto& arg : args) {
+        if (arg.empty())
+            return std::nullopt;
+        if (arg[0] == '-') {
+            auto deĺimiter_pos = arg.find('=');
+            if (deĺimiter_pos == std::string::npos) {
+                data.push_back(arg);
+                continue;
+            }
+            auto key = arg.substr(1, deĺimiter_pos - 1);
+            auto value = arg.substr(deĺimiter_pos + 1);
+            params[key] = value;
+        } else {
+            data.push_back(arg);
+        }
+    }
+    return std::make_pair(data, params);
+}
+
+std::string get_random_mac() {
+    std::ostringstream oss;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib(0, 255);
+    for (int i = 0; i < 6; i++) {
+        if (i > 0)
+            oss << ":";
+        oss << std::hex << distrib(gen);
+    }
+    return oss.str();
 }

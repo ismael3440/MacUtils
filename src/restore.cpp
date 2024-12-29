@@ -12,20 +12,29 @@
 #include "errors.h"
 
 int restore(std::vector<std::string> args) {
-    if (args.size() != 4) {
+    const auto parse = arg_parser(std::vector<std::string>(args.begin() + 2, args.end()));
+    if (!parse.has_value()) {
         ErrorArgumentNotMatching(args[0], args[1], "<nueva_mac> <interfaz>");
         return -1;
     }
-    std::string new_mac = args[2];
-    std::string iface = args[3];
+    const auto& arg_data = parse.value().first;
+    const auto& arg_params = parse.value().second;
 
-    if (!iface_exists(iface)) {
-        ErrorIfaceNotExist(args[0], iface);
-        return -1;
+    std::string new_mac;
+    std::string iface;
+
+    for (auto& arg : arg_data) {
+        if (arg == "-random") {
+            new_mac = get_random_mac();
+        } else if (iface_exists(arg)) {
+            iface = arg;
+        } else if (isMAC(arg)) {
+            new_mac = arg;
+        }
     }
 
-    if (!isMAC(new_mac)) {
-        ErrorInvalidMacAddress(args[0], new_mac);
+    if (iface.empty() || new_mac.empty()) {
+        ErrorArgumentNotMatching(args[0], args[1], "<nueva_mac> <interfaz>");
         return -1;
     }
 
