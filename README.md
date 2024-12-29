@@ -26,7 +26,7 @@ ninja -j$(nproc) -C build
 ```
 
 Compilacion en un directorio personalizado
-```
+```bash
 mkdir build/
 cmake -G Ninja -B build -S . -DCMAKE_INSTALL_PREFIX=$HOME/.local
 ninja -j$(nproc) -C build
