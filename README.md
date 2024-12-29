@@ -26,7 +26,7 @@ ninja -j$(nproc) -C build
 ```
 
 Compilacion en un directorio personalizado
-```bash
+```
 mkdir build/
 cmake -G Ninja -B build -S . -DCMAKE_INSTALL_PREFIX=$HOME/.local
 ninja -j$(nproc) -C build
@@ -38,10 +38,11 @@ Salida de ayuda:
 COMANDO: macutils 1.1; CREADO POR: DarkShark; (C) 2024 DarkShark
 Descripción: Este comando fue desarrollado con el  propósito de poder trabajar con direcciones MAC en redes locales
 
-/help                            -> muestra este mensaje
-/restore <nueva_mac> <interfaz>  -> cambia la dirección MAC de <interfaz> por <nueva_mac>
-         -random                 -> genera una dirección MAC aleatoria
-/search <ip_objetivo> <interfaz> -> busca en la red local <interfaz> la dirección MAC de <ip_objetivo>
+/help                              -> muestra este mensaje
+/restore <nueva_mac> <interfaz>    -> cambia la dirección MAC de <interfaz> por <nueva_mac>
+         -random                   -> genera una dirección MAC aleatoria
+         -copy_of=<interfaz_fuente -> copia la direcccion mac de la interfaz <interfaz_fuente> en la interfaz <interfaz>
+/search <ip_objetivo> <interfaz>   -> busca en la red local <interfaz> la dirección MAC de <ip_objetivo>
 ```
 Ejemplos:
 ```bash

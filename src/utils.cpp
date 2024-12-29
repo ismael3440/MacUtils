@@ -161,6 +161,9 @@ std::optional<std::pair<std::vector<std::string>, std::map<std::string, std::str
             }
             auto key = arg.substr(1, deĺimiter_pos - 1);
             auto value = arg.substr(deĺimiter_pos + 1);
+            if (key.empty() || value.empty()) {
+                return std::nullopt;
+            }
             params[key] = value;
         } else {
             data.push_back(arg);

@@ -23,7 +23,17 @@ int restore(std::vector<std::string> args) {
     std::string new_mac;
     std::string iface;
 
-    for (auto& arg : arg_data) {
+    for (const auto& param : arg_params) {
+        if (param.first == "copy_of") {
+            if (!iface_exists(param.second)) {
+                ErrorIfaceNotExist(args[0], iface);
+                return -1;
+            }
+            new_mac = mac_to_string(get_device_mac(param.second));
+        }
+    }
+
+    for (const auto& arg : arg_data) {
         if (arg == "-random" && new_mac.empty()) {
             new_mac = get_random_mac();
         } else if (iface_exists(arg) && iface.empty()) {
