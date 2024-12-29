@@ -24,11 +24,11 @@ int restore(std::vector<std::string> args) {
     std::string iface;
 
     for (auto& arg : arg_data) {
-        if (arg == "-random") {
+        if (arg == "-random" && new_mac.empty()) {
             new_mac = get_random_mac();
-        } else if (iface_exists(arg)) {
+        } else if (iface_exists(arg) && iface.empty()) {
             iface = arg;
-        } else if (isMAC(arg)) {
+        } else if (isMAC(arg) && new_mac.empty()) {
             new_mac = arg;
         }
     }
