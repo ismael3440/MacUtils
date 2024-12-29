@@ -12,6 +12,7 @@ int help(std::vector<std::string> args) {
 << std::endl
 << "/help                            -> muestra este mensaje" << std::endl
 << "/restore <nueva_mac> <interfaz>  -> cambia la dirección MAC de <interfaz> por <nueva_mac>" << std::endl
+<< "         -random                 -> genera una dirección MAC aleatoria" << std::endl
 << "/search <ip_objetivo> <interfaz> -> busca en la red local <interfaz> la dirección MAC de <ip_objetivo>" << std::endl;
     return 0;
 }

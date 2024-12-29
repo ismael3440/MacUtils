@@ -25,7 +25,7 @@ int restore(std::vector<std::string> args) {
 
     for (auto& arg : arg_data) {
         if (arg == "-random") {
-            // soon
+            new_mac = get_random_mac();
         } else if (iface_exists(arg)) {
             iface = arg;
         } else if (isMAC(arg)) {

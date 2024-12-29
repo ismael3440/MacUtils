@@ -1,5 +1,6 @@
 #include <cstddef>
 #include <optional>
+#include <random>
 #include <string>
 #include <array>
 #include <sstream>
@@ -33,7 +34,6 @@ std::string mac_to_string(std::array<uint8_t, 6> mac) {
     for (size_t i = 0; i < mac.size(); i++) {
         if (i > 0)
             oss << ':';
-
         oss << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(mac[i]);
     }
     return oss.str();
@@ -167,4 +167,17 @@ std::optional<std::pair<std::vector<std::string>, std::map<std::string, std::str
         }
     }
     return std::make_pair(data, params);
+}
+
+std::string get_random_mac() {
+    std::ostringstream oss;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib(0, 255);
+    for (int i = 0; i < 6; i++) {
+        if (i > 0)
+            oss << ":";
+        oss << std::hex << distrib(gen);
+    }
+    return oss.str();
 }

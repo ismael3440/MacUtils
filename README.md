@@ -40,6 +40,7 @@ Descripción: Este comando fue desarrollado con el  propósito de poder trabajar
 
 /help                            -> muestra este mensaje
 /restore <nueva_mac> <interfaz>  -> cambia la dirección MAC de <interfaz> por <nueva_mac>
+         -random                 -> genera una dirección MAC aleatoria
 /search <ip_objetivo> <interfaz> -> busca en la red local <interfaz> la dirección MAC de <ip_objetivo>
 ```
 Ejemplos:
