@@ -54,19 +54,19 @@ void ErrorSockConfigTimeOut(std::string filePath, std::string iface) {
 
 void ErrorGetDeviceMac(std::string filePath, std::string iface) {
     std::print("{}: No se pudo obtener la dirección MAC de este dispositivo en la interfaz {}\n"
-               "GetDeviceMAC: {}",
+               "GetDeviceMAC: {}\n",
                filePath, iface, std::strerror(errno));
 }
 
 void ErrorGetDeviceIp(std::string filePath, std::string iface) {
     std::print("{}: No se pudo obtener la dirección IP de este dispocitivo en la interfaz {}\n"
-               "GetDeviceIP: {}",
+               "GetDeviceIP: {}\n",
                filePath, iface, std::strerror(errno));
 }
 
 void ErrorStringToIp(std::string filePath, std::string str) {
     std::print("{}: Error al convertir la cadena {} en un formato de dirección IP\n"
-               "StringToIP: {}",
+               "StringToIP: {}\n",
                filePath, str, std::strerror(errno));
 }
 
