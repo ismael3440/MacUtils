@@ -177,7 +177,7 @@ std::string get_random_mac() {
     for (int i = 0; i < 6; i++) {
         if (i > 0)
             oss << ":";
-        oss << std::hex << distrib(gen);
+        oss << std::hex << std::setw(2) << std::setfill('0') << distrib(gen);
     }
     return oss.str();
 }
