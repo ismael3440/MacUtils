@@ -47,7 +47,7 @@ int search(std::vector<std::string> args) {
         uint32_t pdst;
     } arphdr;
 
-    std::array<uint8_t, BUFSIZ> buffer;
+    std::array<uint8_t, sizeof(ethhdr) + sizeof(arphdr)> buffer;
     auto& eth = *reinterpret_cast<decltype(&ethhdr)>(buffer.data());
     auto& arp = *reinterpret_cast<decltype(&arphdr)>(buffer.data() + sizeof(ethhdr));
 
