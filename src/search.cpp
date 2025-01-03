@@ -1,4 +1,3 @@
-#include <iostream>
 #include <print>
 #include <vector>
 #include <string>
@@ -12,22 +11,30 @@
 #include "errors.h"
 
 int search(std::vector<std::string> args) {
-    if (args.size() != 4) {
+    auto parse = arg_parser(std::vector<std::string>(args.begin() + 2, args.end()));
+    if (!parse.has_value()) {
         ErrorArgumentNotMatching(args[0], args[1], "<ip_objetivo> <interfaz>");
         return -1;
     }
-    auto dest = std::string(args[2]);
-    auto iface = std::string(args[3]);
 
-    if (!iface_exists(iface)) {
-        ErrorIfaceNotExist(args[0], iface);
-        return -1;
+    const auto& arg_data = parse.value().first;
+    const auto& arg_params = parse.value().second;
+
+    std::string dest;
+    std::string iface;
+
+    for (const auto& arg: arg_data) {
+        if (iface_exists(arg) && iface.empty()) {
+            iface = arg;
+        } else if (isIP(arg) && dest.empty()) {
+            dest = arg;
+        }
     }
 
-    if(!isIP(dest)) {
-        ErrorInvalidIpAddress(args[0], dest);
+    if (dest.empty() || iface.empty()) {
+        ErrorArgumentNotMatching(args[0], args[1], "<ip_objetivo> <interfaz>");
         return -1;
-    }
+    } 
 
     struct [[gnu::packed]] {
         std::array<uint8_t, 6> hsrc;
