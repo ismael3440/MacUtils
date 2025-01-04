@@ -14,8 +14,6 @@ void ErrorSockConfigTimeOut(std::string, std::string);
 void ErrorGetDeviceMac(std::string, std::string);
 void ErrorGetDeviceIp(std::string, std::string);
 void ErrorStringToIp(std::string, std::string);
-
-void ErrorRestoreSocket(std::string, std::string);
-void ErrorRestoreIoctl(std::string, std::string);
+void ErrorSetDeviceMac(std::string, std::string);
 
 #endif // __ERRORS_H__

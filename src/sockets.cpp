@@ -5,8 +5,10 @@
 #include <arpa/inet.h>
 #include <net/if.h>
 #include <sys/ioctl.h>
+#include <linux/if_arp.h>
 
 #include "sockets.h"
+#include "utils.h"
 
 std::array<uint8_t, 6> get_device_mac(std::string device) {
     ifreq ifr;
@@ -44,4 +46,23 @@ uint32_t get_device_ip(std::string device) {
     close(sock);
     auto ip = addr.sin_addr;
     return ip.s_addr;
+}
+
+bool set_device_mac(std::string mac, std::string iface) {
+    ifreq ifr;
+    ifr.ifr_hwaddr.sa_family = ARPHRD_ETHER;
+    strncpy(ifr.ifr_name, iface.c_str(), IFNAMSIZ);
+    std::memcpy(ifr.ifr_hwaddr.sa_data, string_to_mac(mac).data(), 6);
+
+    int sock = socket(AF_INET, SOCK_DGRAM, 0);
+    if (sock < 0)
+        return false;
+
+    if(ioctl(sock, SIOCSIFHWADDR, &ifr) < 0) {
+        close(sock);
+        return false;
+    }
+
+    close(sock);
+    return true;
 }

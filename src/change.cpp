@@ -2,11 +2,6 @@
 #include <vector>
 #include <string>
 
-#include <net/if.h>
-#include <linux/if_arp.h>
-#include <arpa/inet.h>
-#include <sys/ioctl.h>
-
 #include "utils.h"
 #include "sockets.h"
 #include "commands.h"
@@ -57,24 +52,11 @@ int change(std::vector<std::string> args) {
     std::println("La dirección MAC {} está siendo cambiada por {} en {}...",
                  mac_to_string(device_mac), new_mac, iface);
 
-    ifreq ifr;
-    ifr.ifr_hwaddr.sa_family = ARPHRD_ETHER;
-    strncpy(ifr.ifr_name, iface.c_str(), IFNAMSIZ);
-    memcpy(ifr.ifr_hwaddr.sa_data, string_to_mac(new_mac).data(), 6);
-
-    int sock = socket(AF_INET, SOCK_DGRAM, 0);
-    if (sock < 0) {
-        ErrorRestoreSocket(args[0], iface);
+    if (!set_device_mac(new_mac, iface)) {
+        ErrorSetDeviceMac(args[0], iface);
         return -1;
     }
 
-    if (ioctl(sock, SIOCSIFHWADDR, &ifr) < 0) {
-        ErrorRestoreIoctl(args[0], iface);
-        close(sock);
-        return -1;
-    }
-
-    close(sock);
     std::println("Su dirección MAC fue cambiada exitosamente por {} en {}.",
                  new_mac, iface);
     return 0;
