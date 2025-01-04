@@ -70,20 +70,8 @@ void ErrorStringToIp(std::string filePath, std::string str) {
                filePath, str, std::strerror(errno));
 }
 
-
-
-
-
-
-
-void ErrorRestoreSocket(std::string filePath, std::string iface) {
-    std::print("{}: Error al cambiar la configuración de la interfaz {}.\n"
-               "Socket: {}",
-               filePath, iface, std::strerror(errno));
-}
-
-void ErrorRestoreIoctl(std::string filePath, std::string iface) {
-    std::print("{}: Error al intentar cambiar la dirección MAC en {}.\n"
-               "Ioctl: {}",
+void ErrorSetDeviceMac(std::string filePath, std::string iface) {
+    std::print("{}: Error al cambiar la dirección MAC en la interfaz {}\n"
+               "SetDeviceMac: {}\n",
                filePath, iface, std::strerror(errno));
 }
