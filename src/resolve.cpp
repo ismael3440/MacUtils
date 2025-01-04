@@ -1,16 +1,18 @@
 #include <print>
 #include <vector>
 #include <string>
+#include <algorithm>
 
 #include <linux/if_arp.h>
 #include <arpa/inet.h>
 #include <net/if.h>
 
 #include "utils.h"
+#include "sockets.h"
 #include "commands.h"
 #include "errors.h"
 
-int search(std::vector<std::string> args) {
+int resolve(std::vector<std::string> args) {
     auto parse = arg_parser(std::vector<std::string>(args.begin() + 2, args.end()));
     if (!parse.has_value()) {
         ErrorArgumentNotMatching(args[0], args[1], "<ip_objetivo> <interfaz>");

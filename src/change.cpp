@@ -8,10 +8,11 @@
 #include <sys/ioctl.h>
 
 #include "utils.h"
+#include "sockets.h"
 #include "commands.h"
 #include "errors.h"
 
-int restore(std::vector<std::string> args) {
+int change(std::vector<std::string> args) {
     const auto parse = arg_parser(std::vector<std::string>(args.begin() + 2, args.end()));
     if (!parse.has_value()) {
         ErrorArgumentNotMatching(args[0], args[1], "<nueva_mac> <interfaz>");

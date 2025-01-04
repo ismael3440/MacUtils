@@ -5,7 +5,7 @@
 #include <vector>
 
 int help(std::vector<std::string>);
-int restore(std::vector<std::string>);
-int search(std::vector<std::string>);
+int change(std::vector<std::string>);
+int resolve(std::vector<std::string>);
 
 #endif // __COMMANDS_H__

@@ -18,9 +18,6 @@ std::string mac_to_string(std::array<uint8_t, 6>);
 uint32_t string_to_ip(std::string);
 std::string ip_to_string(uint32_t);
 
-std::array<uint8_t, 6> get_device_mac(std::string);
-uint32_t get_device_ip(std::string);
-
 std::optional<std::pair<std::vector<std::string>, std::map<std::string, std::string>>> arg_parser(std::vector<std::string>);
 
 std::string get_random_mac();

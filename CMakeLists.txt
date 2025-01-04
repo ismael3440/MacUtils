@@ -16,17 +16,12 @@ add_executable(${PROJECT_NAME}
     src/errors.cpp
     src/utils.cpp
     src/help.cpp
-    src/restore.cpp
-    src/search.cpp
+    src/change.cpp
+    src/resolve.cpp
+    src/sockets.cpp
 )
-
-set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
-set(TEST_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/tests_output)
 
 add_executable(${PROJECT_NAME}_tests
     tests/tests.cpp
     src/utils.cpp
 )
-
-enable_testing()
-add_test(NAME RunTests COMMAND ${PROJECT_NAME}_tests)

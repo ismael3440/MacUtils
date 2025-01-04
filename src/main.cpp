@@ -33,8 +33,8 @@ int main(int argc, char **argv) {
 
     std::map<std::string, int(*)(std::vector<std::string>)> commands;
     commands["/help"] = help;
-    commands["/restore"] = restore;
-    commands["/search"] = search;
+    commands["/change"] = change;
+    commands["/resolve"] = resolve;
 
     if (commands.find(argv[1]) == commands.end()) {
         std::print("{}: El argumento {} no fue encontrado\n"
