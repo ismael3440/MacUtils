@@ -46,10 +46,10 @@ Descripción: Este comando fue desarrollado con el  propósito de poder trabajar
 ```
 Ejemplos:
 ```bash
-sudo macutils /restore 1F:2E:3D:4C:5B:6A eth0
+sudo macutils /change 1F:2E:3D:4C:5B:6A eth0
 ```
 ```bash
-sudo macutils /search 192.168.1.1 eth0
+sudo macutils /resolve 192.168.1.1 eth0
 ```
 ## 🌟 ¡Apoya el Proyecto!  
 Si te ha gustado este proyecto, no olvides dejar tu estrella ⭐ para ayudarnos a seguir mejorándolo.  
