@@ -16,6 +16,7 @@ add_executable(${PROJECT_NAME}
     src/errors.cpp
     src/utils.cpp
     src/help.cpp
-    src/restore.cpp
-    src/search.cpp
+    src/change.cpp
+    src/resolve.cpp
+    src/sockets.cpp
 )
